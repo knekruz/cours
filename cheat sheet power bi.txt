@@ -1,0 +1,23 @@
+trouver les doublons: dans tronsofmer " regrouper par"  ensuite " nombre de doublons"
+supprimer les doublons en ne gardant que les dernieres date de modification : Trier ville en croissant et date en decroissant  ensuite supprimer les doublons , ca ne garde que les lignes uniques de derniere date.
+supprimer tout sauf les chiffres: Text.Select([Colonne], {"0".."9"})
+
+transformation:
+#"Valeur remplacée" = Table.ReplaceValue(#"Colonne", "é", "e", Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée1" = Table.ReplaceValue(#"Valeur remplacée","è","e",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée2" = Table.ReplaceValue(#"Valeur remplacée1","à","a",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée3" = Table.ReplaceValue(#"Valeur remplacée2","â","a",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée4" = Table.ReplaceValue(#"Valeur remplacée3","ê","e",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée5" = Table.ReplaceValue(#"Valeur remplacée4","î","i",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée6" = Table.ReplaceValue(#"Valeur remplacée5","ï","i",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée7" = Table.ReplaceValue(#"Valeur remplacée6","ô","o",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée8" = Table.ReplaceValue(#"Valeur remplacée7","ù","u",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée9" = Table.ReplaceValue(#"Valeur remplacée8","û","u",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Valeur remplacée10" = Table.ReplaceValue(#"Valeur remplacée9","ç","c",Replacer.ReplaceText,{"Ville", "Departement", "Region"}),
+    #"Texte en minuscules" = Table.TransformColumns(#"Valeur remplacée10",{{"Ville", Text.Lower, type text}, {"Departement", Text.Lower, type text},{"Region", Text.Lower, type text}}),
+    #"Espaces supprimés" = Table.TransformColumns(#"Texte en minuscules",{{"Ville", Text.Trim, type text}, {"Departement", Text.Trim, type text},{"Region", Text.Trim, type text}})
+in
+    #"Espaces supprimés"
+
+
+https://kayumars.com/cours/notes_de_cours.php
